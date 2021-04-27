@@ -4,14 +4,12 @@
 // that code so it'll be compiled.
 
 
+
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
-import 'bootstrap/dist/js/bootstrap'
-import 'bootstrap/dist/css/bootstrap'
-require("stylesheets/application.scss")
+import "bootstrap"
 
-// import "./selectize"
 window.jQuery=$;
 window.$=$;
 

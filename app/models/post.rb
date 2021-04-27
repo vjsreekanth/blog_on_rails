@@ -10,4 +10,10 @@ class Post < ApplicationRecord
     length: { minimum: 50 },
   )
 
+  before_save :titleize_title
+
+  def titleize_title
+    self.title = self.title.titleize
+  end
+
 end
