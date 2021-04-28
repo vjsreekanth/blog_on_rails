@@ -12,7 +12,8 @@ class CommentsController < ApplicationController
             flash[:light] = 'Comment created'
           redirect_to post_path(@post)
         else
-          render '/posts/show'
+          @comments = @post.comments.order(created_at: :desc)
+          render 'posts/show'
         end
     end
 

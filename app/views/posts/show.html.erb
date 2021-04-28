@@ -2,7 +2,7 @@
   <div class="container">
     <h1> <%= @post.title %> </h1>
 
-    <p><%= @post.body %></p>
+    <p class="over"><%= @post.body %></p>
     <small>
       <p>Posted <%= time_ago_in_words(@post.created_at) %> ago
       </p>
@@ -32,7 +32,7 @@
           <%= form_with model: [@post, @comment], local: true do |f| %>
             <% if @comment.errors.present? %>
                 <p>
-                  <%= comments.errors.full_messages.join(", ") %>
+                  <%= @comment.errors.full_messages.join(", ") %>
                 </p>
             <% end %>
             
@@ -40,12 +40,14 @@
               
               <%= f.text_area(
                 :body,
-                 cols: 50,
-                  rows: 5, 
+                 
 
               class: 'form-control', placeholder: "What's on your mind?" )%>
             </div>
-            <%= f.submit class: 'btn btn-primary' %>
+      
+            <%= f.submit ("Submit"), class: "btn btn-outline-primary"%>
+           
+            
           <% end %>
         </div><br>
 
@@ -53,7 +55,7 @@
 
     <% @comments.each do |comment| %>
     <div class=container>
-        <p> <%= comment.body %> </p>
+        <p class="over"> <%= comment.body %> </p>
         <small>
           <p> Commented <%= time_ago_in_words(comment.created_at) %> ago    
               <%= link_to(

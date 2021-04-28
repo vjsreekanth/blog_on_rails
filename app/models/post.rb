@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   validates(
     :body, 
     presence: { message: "must include a body" },
-    length: { minimum: 50 },
+    length: { minimum: 50 }
   )
 
   before_save :titleize_title
