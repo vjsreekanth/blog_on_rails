@@ -38,7 +38,7 @@
                   <%= @comment.errors.full_messages.join(", ") %>
                 </p>
             <% end %>
-          <% if can?(:crud, @post) %> 
+          <% if user_signed_in?  %> 
             <div class='form-group'>
               
               <%= f.text_area(

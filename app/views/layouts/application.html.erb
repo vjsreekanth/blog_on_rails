@@ -38,10 +38,10 @@
           </li>
           <% if user_signed_in? %>
             
-              
+              <p class="nav-link mr-0">Welcome</p>
            
-            <li class="nav-item">
-                <%= link_to "Welcome:  " + current_user.name.capitalize(), edit_user_path(current_user), class: "nav-link text-primary" %>
+            <li class="nav-item ml-0">
+                <%= link_to current_user.name.capitalize(), edit_user_path(current_user), class: "nav-link text-primary"%>
             </li>
             <li class="nav-item">
               <%= link_to 'Sign Out', session_path, method: :delete, data: {confirm: "Log out?" }, class: "nav-link text-primary" %>

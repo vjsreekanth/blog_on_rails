@@ -56,7 +56,7 @@ class UsersController < ApplicationController
                 redirect_to request.referrer
             end
         else
-            flash[:danger] = "You've entered an invalid current password"
+            flash[:danger] = "You've entered invalid password form inputs, Please follow rules"
             redirect_to request.referrer    
         end
     end

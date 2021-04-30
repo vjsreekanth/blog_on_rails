@@ -14,9 +14,9 @@
     <%= form.label :email %>
     <%= form.email_field :email, class:"form-control"  %>
   </div>
-  <%= form.submit "Update Profile" %>
+  <%= form.submit "Update Profile", class:"btn btn-outline-primary" %>
 <% end %>
 
-<div class="mt-2">
-<%=link_to "Change Password", edit_password_path(@user),class: "btn btn-success" %>
+<div class="mt-4">
+<%=link_to "Change Password", edit_password_path(@user),class:"btn btn-outline-primary" %>
 </div>

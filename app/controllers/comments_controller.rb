@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :create]
   before_action :find_comment, only: [:show, :edit, :update, :destroy]
   # before_action :authorize, only: [:edit, :update, :destroy, :create] 
 
@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
         @post = Post.find params[:post_id]
         @comment = Comment.new comment_params
         @comment.post = @post
-        @comment.user = @current_user
+        @comment.user = current_user
         
         if @comment.save
             flash[:light] = 'Comment created'

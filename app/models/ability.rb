@@ -18,11 +18,17 @@ class Ability
     end
     # user_id: user.id
 
-
+    
     # for comment
-    can :crud, Comment do |comment|
+    can [:crud], Comment do |comment|
       comment.user == user || comment.post.user == user
     end
+
+    can [:create, :read], Comment do |comment|
+      user
+    end
+
+
 
     can :crud, User do |u|
       user.id == u.id
