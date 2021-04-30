@@ -4,15 +4,17 @@
 
     <p class="over"><%= @post.body %></p>
     <small>
-      <p>Posted <%= time_ago_in_words(@post.created_at) %> ago
+      <p>Posted <%= time_ago_in_words(@post.created_at) %> ago 
+      by <em><%= @post.user.name %></em>
       </p>
     </small>
     </p>
   </div>
 
-   
+   <% if can?(:crud, @post) %>
       <div class="container">
           <%= link_to "Edit", edit_post_path(@post), class: 'btn btn-info'%>
+
           <%= link_to(
             'Delete',
             post_path(@post),
@@ -23,6 +25,7 @@
           %>
           
       </div>
+    <% end%>
   
       <br>
 
@@ -35,7 +38,7 @@
                   <%= @comment.errors.full_messages.join(", ") %>
                 </p>
             <% end %>
-            
+          <% if can?(:crud, @post) %> 
             <div class='form-group'>
               
               <%= f.text_area(
@@ -47,8 +50,8 @@
       
             <%= f.submit ("Submit"), class: "btn btn-outline-primary"%>
            
-            
           <% end %>
+        <% end %>
         </div><br>
 
     
@@ -57,7 +60,9 @@
     <div class=container>
         <p class="over"> <%= comment.body %> </p>
         <small>
-          <p> Commented <%= time_ago_in_words(comment.created_at) %> ago    
+          <p> Commented <%= time_ago_in_words(comment.created_at) %> ago by 
+          <em><%= comment.user.name  || "[deleted]" %></em> 
+          <% if can?(:crud, comment) %>  
               <%= link_to(
                     "Delete",
                     comment_path(comment),
@@ -65,6 +70,8 @@
                     data: { confirm: 'delete this comment?' }
                     )
               %>
+
+          <% end%>
            
           </p>
         </small>
