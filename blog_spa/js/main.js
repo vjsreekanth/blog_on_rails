@@ -206,6 +206,7 @@ editPostForm.addEventListener('submit', (event) =>{
     Post.update(editFormData.get('id'), updatePostParams)
     .then(post => {
         editPostForm.reset();
+        loadPosts();
         renderPostShow(post.id);
         navigateTo('post-show')
     });
