@@ -1,6 +1,7 @@
 class Api::V1::PostsController < Api::ApplicationController
     before_action :find_post, only:[:show, :destroy, :update]
-    # before_action :authenticate_user!, only:[:create, :destroy, :update]
+    before_action :authenticate_user!, only:[:create, :destroy, :update]
+    before_action :authorize!, only: [:update, :destroy]
 
     def index
         posts = Post.order created_at: :desc
@@ -13,7 +14,7 @@ class Api::V1::PostsController < Api::ApplicationController
    
     def create
         post = Post.new post_params
-        post.user = User.first
+        post.user = current_user
         if post.save
             render json:{id: post.id}
         else
@@ -50,4 +51,16 @@ class Api::V1::PostsController < Api::ApplicationController
         def post_params
             params.require(:post).permit(:title, :body)
         end
+
+        def authorize!
+            unless can?(:crud, @post)
+              render(
+                json: { 
+                  status: 401 
+                },
+                status: 401 #Not Authorized
+              )
+            end
+        end
+          
 end   

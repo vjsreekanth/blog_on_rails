@@ -8,7 +8,7 @@
 
 NUM_OF_USERS = 20
 PASSWORD = '123'
-
+Like.delete_all()
 Comment.delete_all()
 Post.delete_all()
 User.destroy_all()
@@ -18,7 +18,7 @@ super_user = User.create(
   email: 'js@winterfell.gov',
   is_admin: true,
   password: PASSWORD,
-  new_password:
+  
 )
 
 NUM_OF_USERS.times do |x|
@@ -27,7 +27,7 @@ NUM_OF_USERS.times do |x|
     email: Faker::Internet.email,
     is_admin: false,
     password: PASSWORD
-    new_password:
+    
   })
 end
 
@@ -53,6 +53,7 @@ users = User.all
             user: users.sample,
           )
         end
+        p.likers = users.shuffle.slice(0, rand(users.count))
     end
 end
 

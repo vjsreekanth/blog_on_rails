@@ -1,5 +1,5 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :title, :body
+  attributes :id, :title, :body, :like_count
 
   def like_count
     object.likes.count
@@ -7,6 +7,6 @@ class PostSerializer < ActiveModel::Serializer
 
   belongs_to :user, key: :author
 
-  # has_many :reviews
+
   
 end

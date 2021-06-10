@@ -5,11 +5,29 @@
     <p class="over"><%= @post.body %></p>
     <small>
       <p>Posted <%= time_ago_in_words(@post.created_at) %> ago 
-      by <em><%= @post.user.name %></em>
+      by <em><%= @post.user.name %></em>|
+       <%= pluralize(@post.likes.count, "like") %>
       </p>
     </small>
     </p>
   </div>
+  <% if @like.present? %>
+    <%= 
+      link_to(
+        "Unlike",
+        post_like_path(@post, @like),
+        method: :delete
+      )
+    %>
+  <% else %>
+    <%= 
+      link_to(
+        "Like",
+        post_likes_path(@post),
+        method: :post
+      )
+    %>
+  <% end %>
 
    <% if can?(:crud, @post) %>
       <div class="container">
