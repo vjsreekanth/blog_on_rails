@@ -18,6 +18,6 @@
     <%= form.text_area :body, class:"form-control" %>
   </div>
 
-  <%# The argument to "submit" is the text displayed on the submmit button %>
-  <%= form.submit(@post.new_record? ? 'Create Post' : 'Update') %>
+ 
+  <%= form.submit(@post.new_record? ? 'Create Post' : 'Update Post', class:"btn btn-outline-primary") %>
 <% end %>

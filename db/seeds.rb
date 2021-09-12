@@ -6,9 +6,33 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Comment.delete_all
+NUM_OF_USERS = 20
+PASSWORD = '123'
 
-Post.delete_all
+Comment.delete_all()
+Post.delete_all()
+User.destroy_all()
+
+super_user = User.create(
+  name: 'jon',
+  email: 'js@winterfell.gov',
+  is_admin: true,
+  password: PASSWORD,
+  new_password:
+)
+
+NUM_OF_USERS.times do |x|
+  u = User.create({
+    name: Faker::Games::SuperSmashBros.fighter,
+    email: Faker::Internet.email,
+    is_admin: false,
+    password: PASSWORD
+    new_password:
+  })
+end
+
+users = User.all
+
 
 100.times do
     created_at = Faker::Date.backward(365 * 5)
@@ -18,7 +42,7 @@ Post.delete_all
       created_at: created_at,
       updated_at: created_at,
     #   # We can use the user instance for the "user" attribute rather than using "user_id"
-    #   user: users.sample,
+      user: users.sample,
     )
 
     if p.valid?
@@ -26,7 +50,7 @@ Post.delete_all
         p.comments = rand(0..15).times.map do
           Comment.new(
             body: Faker::GreekPhilosophers.quote,
-            # user: users.sample,
+            user: users.sample,
           )
         end
     end
@@ -34,3 +58,5 @@ end
 
 puts Cowsay.say("Generated #{Post.count} posts", :koala)
 puts Cowsay.say("Generated #{Comment.count} comments", :stegosaurus)
+puts Cowsay.say("Created #{users.count}  users!", :turtle)
+puts Cowsay.say("Sign in with #{super_user.email} and password: #{PASSWORD}", :cow)
